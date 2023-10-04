@@ -1,0 +1,5 @@
+*.yml
+*.env
+*.conf
+/__pycache__
+/videos
