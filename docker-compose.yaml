@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  mysql:
+    restart: always
+    container_name: "mysql"
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_USER=video_user
+      - MYSQL_DATABASE=video_database
+      - MYSQL_PASSWORD=video_password
+    volumes:
+     - mysql:/var/lib/mysql
+
+  python:
+    restart: always
+    container_name: "Upload Videos"
+    image: python:latest
+    ports:
+      - sodjnisdofsodf
+    expose:
+      - oiasndsda
+    environment:
+      - donfidnsfsdf
+    network_mode: bridged
+
+volumes:
+ mysql:
+
+
+
+  
