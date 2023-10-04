@@ -1,6 +1,9 @@
 version: "3.9"
 services:
   mysql:
+    build: 
+      context: ./video_db
+      dockerfile: Dockerfile
     restart: always
     container_name: "mysql"
     image: mysql:latest
@@ -15,19 +18,22 @@ services:
      - mysql:/var/lib/mysql
 
   python:
+    build:
+     context: ./app_upload
+     dockerfile: ./web_upload/Dockerfile
     restart: always
     container_name: "Upload Videos"
     image: python:latest
     ports:
-      - sodjnisdofsodf
-    expose:
-      - oiasndsda
-    environment:
-      - donfidnsfsdf
+      - 5000:5000 ## >:D
+    links:
+      - mysql
     network_mode: bridged
 
 volumes:
  mysql:
+
+# :D
 
 
 
