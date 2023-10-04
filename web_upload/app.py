@@ -1,5 +1,6 @@
 import os
 import yaml
+
 from flask import *
 from base import Base
 from sqlalchemy import create_engine
@@ -7,11 +8,14 @@ from sqlalchemy.orm import sessionmaker
 from video_file import VideoFile
 from werkzeug.utils import secure_filename
 
+
 app = Flask(__name__)
+
 
 # Reading credentials
 with open('app_conf.yml', 'r') as f:
     app_config = yaml.safe_load(f.read())
+
 
 # Create and connect to the database
 DB_ENGINE = create_engine(f'mysql+pymysql://'
@@ -24,6 +28,7 @@ Base.metadata.bind = DB_ENGINE
 DB_SESSION = sessionmaker(bind=DB_ENGINE)
 ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mov', 'mkv', 'wmv'}
 
+
 # Create the "videos" folder if it doesn't exist
 if not os.path.exists('videos'):
     os.makedirs('videos')
@@ -32,6 +37,7 @@ if not os.path.exists('videos'):
 # Function to check if a filename has a valid video file extension
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 # Page to upload video files
 @app.route('/upload')
@@ -60,7 +66,8 @@ def upload_success():
 
             return render_template("Success.html", name=filename)
         else:
-            return "Invalid file format. Please upload a valid video file."
+            # Lead the user here if the upload is invalid
+            return render_template("InvalidUpload.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
