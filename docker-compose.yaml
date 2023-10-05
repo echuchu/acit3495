@@ -15,14 +15,14 @@ services:
       - MYSQL_DATABASE=video_database
       - MYSQL_PASSWORD=video_password
     volumes:
-     - mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
 
   python:
     build:
-     context: ./app_upload
+     context: ./web_upload
      dockerfile: ./web_upload/Dockerfile
     restart: always
-    container_name: "Upload Videos"
+    container_name: "upload_videos"
     image: python:latest
     ports:
       - 5000:5000 ## >:D
@@ -30,8 +30,24 @@ services:
       - mysql
     network_mode: bridged
 
+  authentication:
+    build:
+      context: ./auth
+      dockerfile: ./auth/Dockerfile
+    restart: always
+    container_name: "auth_server"
+    image: nginx:latest
+    ports:
+      - 8080:80
+      - 30532:30532
+    environment:
+      - BASIC_AUTH_USERNAME=username
+      - BASIC_AUTH_PASSWORD=password
+      - SERVER_NAME=proxy.acit3495.net
+      - PORT=80
+
 volumes:
- mysql:
+  mysql:
 
 # :D
 
