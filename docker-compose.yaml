@@ -16,8 +16,11 @@ services:
       - MYSQL_PASSWORD=video_password
     volumes:
       - mysql:/var/lib/mysql
+    networks:
+      - upload_network
+      - streaming_network
 
-  python:
+  upload_server:
     build:
      context: ./web_upload
      dockerfile: ./web_upload/Dockerfile
@@ -28,9 +31,11 @@ services:
       - 5000:5000 ## >:D
     links:
       - mysql
-    network_mode: bridged
+    networks:
+      - upload_network
+      - web_network
 
-  authentication:
+  authentication_server:
     build:
       context: ./auth
       dockerfile: ./auth/Dockerfile
@@ -45,9 +50,24 @@ services:
       - BASIC_AUTH_PASSWORD=password
       - SERVER_NAME=proxy.acit3495.net
       - PORT=80
+    networks:
+      - public_network
+      - bridge
 
 volumes:
   mysql:
+
+
+networks:
+  upload_network:
+    driver: overlay
+    internal: true
+  streaming_network:
+    driver: overlay
+    internal: true
+  web_network:
+    driver: overlay
+    internal: true
 
 # :D
 
