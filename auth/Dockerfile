@@ -11,6 +11,7 @@ ENV CLIENT_MAX_BODY_SIZE 1m
 ENV PROXY_READ_TIMEOUT 60s
 ENV WORKER_PROCESSES auto
 
+COPY files/index.html /
 COPY files/run.sh /
 COPY files/nginx.conf.tmpl /
 
