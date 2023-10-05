@@ -2,9 +2,9 @@ FROM mysql
 
 # environment variables
 ENV MYSQL_ROOT_PASSWORD=root_password
-ENV MYSQL_DATABASE=video_database
+ENV MYSQL_DATABASE=video
 ENV MYSQL_USER=video_user
-ENV MYSQL_PASSWORD=video_password
+ENV MYSQL_PASSWORD=password
 
 # SQL script to initialize database
 COPY init.sql /docker-entrypoint-initdb.d/
