@@ -35,6 +35,21 @@ services:
       - upload_network
       - web_network
 
+  stream_server:
+    build:
+     context: ./web_streaming
+     dockerfile: Dockerfile
+    restart: always
+    container_name: "stream_videos"
+    # image: python:latest
+    ports:
+      - 5001:5000
+    links:
+      - mysql
+    networks:
+      - streaming_network
+      - web_network
+
   authentication_server:
     build:
       context: ./auth
