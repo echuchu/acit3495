@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Player</title>
+</head>
+<body>
+    <h1>Video Player</h1>
+    
+    {% if video_files %}
+    <ul>
+        {% for video in video_files %}
+        <li>
+            <a href="{{ url_for('play_video', video_id=video.id) }}">{{ video.filename }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    {% if video_path %}
+    <video width="640" height="360" controls>
+        <source src="{{ url_for('static', filename=video_name.filename ) }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    {% endif %}
+</body>
+</html>

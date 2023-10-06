@@ -13,5 +13,5 @@ COPY requirements.txt /web_streaming/
 RUN pip install -r requirements.txt
 
 # Run app.py when the container launches
-COPY main.py /web_streaming/
-CMD ["python", "main.py"]
+COPY app.py /web_streaming/
+CMD ["python", "app.py"]
