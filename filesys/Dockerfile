@@ -15,10 +15,11 @@ COPY vsftpd.conf /etc/vsftpd.conf
 EXPOSE 20 21
 
 # Create a directory for the FTP data
-RUN mkdir -p /var/ftp
+RUN mkdir -p /srv/ftp/shared
 
 # Set permissions for the FTP directory
-RUN chmod 555 /var/ftp
+RUN chmod 755 /srv/ftp
+RUN chmod 777 /srv/ftp/shared
 
 # Run vsftpd in the foreground when the container starts
 CMD ["vsftpd", "/etc/vsftpd.conf"]

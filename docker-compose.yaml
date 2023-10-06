@@ -73,13 +73,13 @@ volumes:
 
 networks:
   upload_network:
-    driver: overlay
+    driver: bridge
     internal: true
   streaming_network:
-    driver: overlay
+    driver: bridge
     internal: true
   web_network:
-    driver: overlay
+    driver: bridge
     internal: true
   bridge:
     driver: bridge
