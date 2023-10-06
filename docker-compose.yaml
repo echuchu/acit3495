@@ -51,7 +51,7 @@ services:
       - SERVER_NAME=proxy.acit3495.net
       - PORT=80
     networks:
-      - public_network
+      - web_network
       - bridge
 
   filesys:
@@ -65,7 +65,7 @@ services:
       - 50000:20
     networks:
       - streaming_network
-      - public_network
+      - upload_network
 
 volumes:
   mysql:
@@ -81,6 +81,8 @@ networks:
   web_network:
     driver: overlay
     internal: true
+  bridge:
+    driver: bridge
 
 # :D
 
