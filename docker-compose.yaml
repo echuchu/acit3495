@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     container_name: "mysql"
-    image: mysql:latest
+    # image: mysql:latest
     ports:
       - 3306:3306
     environment:
@@ -23,12 +23,12 @@ services:
   upload_server:
     build:
      context: ./web_upload
-     dockerfile: ./web_upload/Dockerfile
+     dockerfile: Dockerfile
     restart: always
     container_name: "upload_videos"
-    image: python:latest
+    # image: python:latest
     ports:
-      - 5000:5000 ## >:D
+      - 5000:5000
     links:
       - mysql
     networks:
@@ -38,10 +38,10 @@ services:
   authentication_server:
     build:
       context: ./auth
-      dockerfile: ./auth/Dockerfile
+      dockerfile: Dockerfile
     restart: always
     container_name: "auth_server"
-    image: nginx:latest
+    # image: nginx
     ports:
       - 8080:80
       - 30532:30532
@@ -57,10 +57,10 @@ services:
   filesys:
     build:
       context: ./filesys
-      dockerfile: ./filesys/Dockerfile
+      dockerfile: Dockerfile
     restart: always
     container_name: "filesys"
-    image: ubuntu:20.04
+    # image: ubuntu
     ports:
       - 50000:20
     networks:
@@ -83,9 +83,6 @@ networks:
     internal: true
   bridge:
     driver: bridge
-
-# :D
-
 
 
   

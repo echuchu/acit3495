@@ -5,9 +5,6 @@ FROM ubuntu:20.04
 RUN apt-get update && \
     apt-get install -y vsftpd
 
-# Create the chroot directory as specified in vsftpd.conf
-RUN mkdir -p /var/run/vsftpd/empty
-
 # Copy the vsftpd configuration file to the container
 COPY vsftpd.conf /etc/vsftpd.conf
 
