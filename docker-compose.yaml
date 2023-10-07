@@ -58,6 +58,7 @@ services:
       streaming_network:
         aliases:
           - stream
+        # ipv4_address: 172.27.0.4
       web_network:
         aliases:
           - stream

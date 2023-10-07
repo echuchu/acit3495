@@ -9,9 +9,9 @@ from video_file import VideoFile
 from werkzeug.utils import secure_filename
 from ftplib import FTP
 
-container_ip = 'filesys'
-ftp_port = 20
-ftp_username= 'user'
+# container_ip = 'filesys'
+# ftp_port = 20
+# ftp_username= 'user'
 # ftp_password = ''
 
 
@@ -60,9 +60,15 @@ def upload():
 def upload_success():
     if request.method == 'POST':
         f = request.files['file']
-        if f and allowed_file(f.filename):
+        if f: #and allowed_file(f.filename): #FIXME: remove after done testing
             filename = secure_filename(f.filename)
-            filepath = FTP.storbinary(f"STOR {DIRECTORY}/", filename)
+            ftp = FTP('filesys')
+            ftp.login()
+            # ftp.storbinary(f'STOR /shared/{filename}', f)
+            # ftp.storbinary(f'STOR /shared/{filename}', f.read())
+            ftp.storbinary(f'STOR /shared/{filename}', f.stream.read())
+            filepath = f'/shared/{filename}'
+            # filepath = FTP.storbinary(f"STOR {DIRECTORY}/", filename)
 
             # Insert file information into the database
             session = DB_SESSION()
@@ -78,4 +84,4 @@ def upload_success():
             return render_template("InvalidUpload.html")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)

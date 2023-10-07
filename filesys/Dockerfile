@@ -5,6 +5,9 @@ FROM ubuntu:20.04
 RUN apt-get update && \
     apt-get install -y vsftpd
 
+# Create the chroot directory
+RUN mkdir -p /var/run/vsftpd/empty
+
 # Copy the vsftpd configuration file to the container
 COPY vsftpd.conf /etc/vsftpd.conf
 
@@ -16,7 +19,9 @@ RUN mkdir -p /srv/ftp/shared
 
 # Set permissions for the FTP directory
 RUN chmod 755 /srv/ftp
-RUN chmod 777 /srv/ftp/shared
+RUN chmod 777 /srv/ftp/shared && chown root:ftp /srv/ftp/shared
+
+RUN echo 'testfile1' > /srv/ftp/shared/testfile1
 
 # Run vsftpd in the foreground when the container starts
 CMD ["vsftpd", "/etc/vsftpd.conf"]
