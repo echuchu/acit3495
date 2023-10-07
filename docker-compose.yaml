@@ -17,8 +17,12 @@ services:
     volumes:
       - mysql:/var/lib/mysql
     networks:
-      - upload_network
-      - streaming_network
+      upload_network:
+        aliases:
+          - mysql
+      streaming_network:
+        aliases:
+          - mysql
 
   upload_server:
     build:
@@ -32,8 +36,12 @@ services:
     links:
       - mysql
     networks:
-      - upload_network
-      - web_network
+      upload_network:
+        aliases:
+          - upload_videos
+      web_network:
+        aliases:
+          - upload_videos
 
   stream_server:
     build:
@@ -47,8 +55,12 @@ services:
     links:
       - mysql
     networks:
-      - streaming_network
-      - web_network
+      streaming_network:
+        aliases:
+          - stream_videos
+      web_network:
+        aliases:
+          - stream_videos
 
   authentication_server:
     build:
@@ -66,8 +78,12 @@ services:
       - SERVER_NAME=proxy.acit3495.net
       - PORT=80
     networks:
-      - web_network
-      - bridge
+      web_network:
+        aliases:
+          - auth_server
+      bridge:
+        aliases:
+          - auth_server
 
   filesys:
     build:
@@ -79,24 +95,28 @@ services:
     ports:
       - 50000:20
     networks:
-      - streaming_network
-      - upload_network
+      streaming_network:
+        aliases:
+          - filesys
+      upload_network:
+        aliases:
+          - filesys
 
 volumes:
   mysql:
 
 
 networks:
-  upload_network:
+  upload_network:     # Connects Upload, File Sys, and DB
     driver: bridge
     internal: true
-  streaming_network:
+  streaming_network:  # Connects Stream, File Sys, and DB
     driver: bridge
     internal: true
-  web_network:
+  web_network:        # Connects Auth, Upload, and Stream
     driver: bridge
     internal: true
-  bridge:
+  bridge:             # Connects Auth to the internet
     driver: bridge
 
 
