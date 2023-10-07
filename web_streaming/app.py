@@ -1,10 +1,11 @@
 import yaml
+import pymysql
+
 from flask import *
 from base import Base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from video_file import VideoFile
-from flask import send_file
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -53,4 +54,4 @@ def play_video(video_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
