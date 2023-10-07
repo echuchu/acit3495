@@ -38,10 +38,10 @@ services:
     networks:
       upload_network:
         aliases:
-          - upload_videos
+          - upload
       web_network:
         aliases:
-          - upload_videos
+          - upload
 
   stream_server:
     build:
@@ -57,10 +57,10 @@ services:
     networks:
       streaming_network:
         aliases:
-          - stream_videos
+          - stream
       web_network:
         aliases:
-          - stream_videos
+          - stream
 
   authentication_server:
     build:
@@ -80,10 +80,10 @@ services:
     networks:
       web_network:
         aliases:
-          - auth_server
+          - auth
       bridge:
         aliases:
-          - auth_server
+          - auth
 
   filesys:
     build:

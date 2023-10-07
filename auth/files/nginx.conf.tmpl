@@ -34,12 +34,12 @@ http {
 
     location /upload {
       proxy_set_header X-Forwarded-HOst $host;
-      proxy_pass http://upload_server;
+      proxy_pass http://upload:5000;
     }
 
     location /stream {
       proxy_set_header X-Forwarded-HOst $host;
-      proxy_pass http://stream_server;
+      proxy_pass http://stream:5001;
     }
 
   }
