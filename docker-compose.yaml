@@ -4,7 +4,7 @@ services:
     build: 
       context: ./video_db
       dockerfile: Dockerfile
-    restart: always
+    # restart: always
     container_name: "mysql"
     # image: mysql:latest
     ports:
@@ -28,7 +28,7 @@ services:
     build:
      context: ./web_upload
      dockerfile: Dockerfile
-    restart: always
+    # restart: always
     container_name: "upload_videos"
     # image: python:latest
     ports:
@@ -47,7 +47,7 @@ services:
     build:
      context: ./web_streaming
      dockerfile: Dockerfile
-    restart: always
+    # restart: always
     container_name: "stream_videos"
     # image: python:latest
     ports:
@@ -66,7 +66,7 @@ services:
     build:
       context: ./auth
       dockerfile: Dockerfile
-    restart: always
+    # restart: always
     container_name: "auth_server"
     # image: nginx
     ports:
@@ -89,7 +89,7 @@ services:
     build:
       context: ./filesys
       dockerfile: Dockerfile
-    restart: always
+    # restart: always
     container_name: "filesys"
     # image: ubuntu
     ports:

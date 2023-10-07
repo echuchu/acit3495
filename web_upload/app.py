@@ -12,7 +12,7 @@ from ftplib import FTP
 container_ip = 'filesys'
 ftp_port = 20
 ftp_username= 'user'
-ftp_password = ''
+# ftp_password = ''
 
 
 app = Flask(__name__)
@@ -22,8 +22,14 @@ app = Flask(__name__)
 with open('app_conf.yml', 'r') as f:
     app_config = yaml.safe_load(f.read())
 
-FTP.connect(app_config["fileupload"]["host"], app_config["fileupload"]["port"])
-FTP.login(user=app_config["fileupload"]["user"], passwd=app_config["fileupload"]["password"])
+# ftp = FTP()
+
+# ftp.connect(host='x', port=)
+# print(ftp.getwelcome())
+# ftp.login(user='ftp')
+
+# FTP.connect(app_config["fileupload"]["host"], app_config["fileupload"]["port"])
+# FTP.login(user=app_config["fileupload"]["user"], passwd=app_config["fileupload"]["password"])
 
 
 # Create and connect to the database

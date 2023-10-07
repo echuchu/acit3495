@@ -1,12 +1,12 @@
-CREATE DATABASE video;
+CREATE DATABASE IF NOT EXISTS video;
 
 USE video;
 
-CREATE USER 'video_user'@'%' IDENTIFIED BY 'password';
+CREATE USER IF NOT EXISTS 'video_user'@'%' IDENTIFIED BY 'password';
 
 GRANT SELECT, INSERT, UPDATE ON video.* TO video_user;
 
-CREATE TABLE video_files (
+CREATE TABLE IF NOT EXISTS video_files (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     filename VARCHAR(255),
     filepath VARCHAR(255)
