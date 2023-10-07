@@ -95,6 +95,8 @@ services:
     # image: ubuntu
     ports:
       - 50000:20
+    # volumes:
+    #   - videos:/srv/ftp
     networks:
       streaming_network:
         aliases:
