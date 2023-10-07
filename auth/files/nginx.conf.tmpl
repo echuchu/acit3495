@@ -37,9 +37,9 @@ http {
       proxy_pass http://upload:5000;
     }
 
-    location /stream {
+    location /display {
       proxy_set_header X-Forwarded-HOst $host;
-      proxy_pass http://stream:5001;
+      proxy_pass http://stream:5000;
     }
 
   }

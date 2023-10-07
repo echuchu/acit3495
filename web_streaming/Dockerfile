@@ -2,7 +2,7 @@ FROM python:3.9
 
 # Flask Applications listen to port 5000 by default
 # Expose it
-EXPOSE 5001
+EXPOSE 5000
 
 # Working Directory 
 # Creates a directory with this name if it does not exist
