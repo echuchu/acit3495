@@ -1,5 +1,5 @@
-import os
 import yaml
+import pymysql
 
 from flask import *
 from base import Base
@@ -7,6 +7,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from video_file import VideoFile
 from werkzeug.utils import secure_filename
+from ftplib import FTP
+
+container_ip = 'filesys'
+ftp_port = 20
+ftp_username= 'user'
+ftp_password = ''
 
 
 app = Flask(__name__)
@@ -15,6 +21,9 @@ app = Flask(__name__)
 # Reading credentials
 with open('app_conf.yml', 'r') as f:
     app_config = yaml.safe_load(f.read())
+
+FTP.connect(app_config["fileupload"]["host"], app_config["fileupload"]["port"])
+FTP.login(user=app_config["fileupload"]["user"], passwd=app_config["fileupload"]["password"])
 
 
 # Create and connect to the database
@@ -27,11 +36,7 @@ DB_ENGINE = create_engine(f'mysql+pymysql://'
 Base.metadata.bind = DB_ENGINE
 DB_SESSION = sessionmaker(bind=DB_ENGINE)
 ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mov', 'mkv', 'wmv'}
-
-
-# Create the "videos" folder if it doesn't exist
-if not os.path.exists('videos'):
-    os.makedirs('videos')
+DIRECTORY = '~/static'
 
 
 # Function to check if a filename has a valid video file extension
@@ -51,10 +56,7 @@ def upload_success():
         f = request.files['file']
         if f and allowed_file(f.filename):
             filename = secure_filename(f.filename)
-            filepath = os.path.abspath(os.path.join('videos', filename))
-
-            # Save the file to the "videos" folder
-            f.save(filepath)
+            filepath = FTP.storbinary(f"STOR {DIRECTORY}/", filename)
 
             # Insert file information into the database
             session = DB_SESSION()
