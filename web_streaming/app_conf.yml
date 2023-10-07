@@ -1,0 +1,12 @@
+version: 1
+datastore:
+  user: video_user
+  password: password
+  hostname: mysql
+  port: 3306
+  db: video
+# fileupload:
+#   user: ftp
+#   password:
+#   hostname: filsys
+#   port: 20

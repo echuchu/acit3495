@@ -1,6 +1,6 @@
 import yaml
 import pymysql
-
+import os
 from flask import *
 from base import Base
 from sqlalchemy import create_engine
@@ -62,17 +62,20 @@ def upload_success():
         f = request.files['file']
         if f: #and allowed_file(f.filename): #FIXME: remove after done testing
             filename = secure_filename(f.filename)
+            f.save(os.path.join('/tmp', filename))
+            
+            ftp_filepath = f'/shared/{filename}'
+
             ftp = FTP('filesys')
             ftp.login()
-            # ftp.storbinary(f'STOR /shared/{filename}', f)
-            # ftp.storbinary(f'STOR /shared/{filename}', f.read())
-            ftp.storbinary(f'STOR /shared/{filename}', f.stream.read())
-            filepath = f'/shared/{filename}'
+            
+            ftp.storbinary(f'STOR {ftp_filepath}', open(f'/tmp/{filename}', 'rb'))
+            ftp.quit()
             # filepath = FTP.storbinary(f"STOR {DIRECTORY}/", filename)
 
             # Insert file information into the database
             session = DB_SESSION()
-            video = VideoFile(filename=filename, filepath=filepath)
+            video = VideoFile(filename=filename, filepath=ftp_filepath)
 
             session.add(video)
             session.commit()
