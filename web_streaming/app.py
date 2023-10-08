@@ -6,9 +6,10 @@ from base import Base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from video_file import VideoFile
+from ftplib import FTP
 
 app = Flask(__name__)
-app.static_folder = 'static'
+app.static_folder = '/tmp'
 
 
 # Reading credentials
@@ -42,6 +43,14 @@ def play_video(video_id):
     selected_video = session.query(VideoFile).filter_by(id=video_id).first()
     session.close()
 
+    ftp = FTP('filesys')
+    ftp.login()
+
+    with open(f'/tmp/{selected_video.filename}', 'wb') as f:
+                ftp.retrbinary(f'RETR {selected_video.filepath}', f.write)
+    
+    ftp.quit()
+
     if selected_video:
         # Construct the full path to the video file based on the database filepath
         return render_template("VideoPlayer.html", 
@@ -54,4 +63,4 @@ def play_video(video_id):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0')

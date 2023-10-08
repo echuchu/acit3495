@@ -95,8 +95,8 @@ services:
     # image: ubuntu
     ports:
       - 50000:20
-    # volumes:
-    #   - videos:/srv/ftp
+    volumes:
+      - videos:/srv/ftp
     networks:
       streaming_network:
         aliases:
@@ -107,6 +107,7 @@ services:
 
 volumes:
   mysql:
+  videos:
 
 
 networks:

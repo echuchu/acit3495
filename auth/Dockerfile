@@ -5,7 +5,7 @@ RUN apt update
 RUN apt install -y apache2-utils
 RUN rm -f /etc/nginx/conf.d/*
 
-ENV CLIENT_MAX_BODY_SIZE 1m
+ENV CLIENT_MAX_BODY_SIZE 1000M
 ENV PROXY_READ_TIMEOUT 60s
 ENV WORKER_PROCESSES auto
 
