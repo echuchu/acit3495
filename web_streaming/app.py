@@ -39,20 +39,21 @@ def display():
     
 @app.route('/play_video/<int:video_id>')
 def play_video(video_id):
+    
+    # Get video info from database
     session = DB_SESSION()
     selected_video = session.query(VideoFile).filter_by(id=video_id).first()
     session.close()
 
+    # Use ftp to get video file from filesys
     ftp = FTP('filesys')
     ftp.login()
-
+    # Save video file temporarily into /tmp
     with open(f'/tmp/{selected_video.filename}', 'wb') as f:
         ftp.retrbinary(f'RETR {selected_video.filepath}', f.write)
-    
     ftp.quit()
 
     if selected_video:
-        # Construct the full path to the video file based on the database filepath
         return render_template("VideoPlayer.html", 
                                video_path=selected_video.filepath, 
                                video_name=selected_video.filename)

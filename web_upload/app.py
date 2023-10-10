@@ -9,11 +9,6 @@ from video_file import VideoFile
 from werkzeug.utils import secure_filename
 from ftplib import FTP
 
-# container_ip = 'filesys'
-# ftp_port = 20
-# ftp_username= 'user'
-# ftp_password = ''
-
 
 app = Flask(__name__)
 
@@ -21,15 +16,6 @@ app = Flask(__name__)
 # Reading credentials
 with open('app_conf.yml', 'r') as f:
     app_config = yaml.safe_load(f.read())
-
-# ftp = FTP()
-
-# ftp.connect(host='x', port=)
-# print(ftp.getwelcome())
-# ftp.login(user='ftp')
-
-# FTP.connect(app_config["fileupload"]["host"], app_config["fileupload"]["port"])
-# FTP.login(user=app_config["fileupload"]["user"], passwd=app_config["fileupload"]["password"])
 
 
 # Create and connect to the database
@@ -60,23 +46,22 @@ def upload():
 def upload_success():
     if request.method == 'POST':
         f = request.files['file']
-        if f: #and allowed_file(f.filename): #FIXME: remove after done testing
+        if f and allowed_file(f.filename):
+            
+            # Save temporarily into /tmp to be able to transfer
             filename = secure_filename(f.filename)
             f.save(os.path.join('/tmp', filename))
-            
-            ftp_filepath = f'/shared/{filename}'
 
+            # Use ftp to save file to filesys
+            ftp_filepath = f'/shared/{filename}'
             ftp = FTP('filesys')
             ftp.login()
-            
             ftp.storbinary(f'STOR {ftp_filepath}', open(f'/tmp/{filename}', 'rb'))
             ftp.quit()
-            # filepath = FTP.storbinary(f"STOR {DIRECTORY}/", filename)
 
             # Insert file information into the database
             session = DB_SESSION()
             video = VideoFile(filename=filename, filepath=ftp_filepath)
-
             session.add(video)
             session.commit()
             session.close()
