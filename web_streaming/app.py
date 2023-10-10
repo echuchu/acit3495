@@ -36,7 +36,7 @@ def display():
 
     return render_template("VideoPlayer.html", video_files=video_files)
 
-
+    
 @app.route('/play_video/<int:video_id>')
 def play_video(video_id):
     session = DB_SESSION()
@@ -47,7 +47,7 @@ def play_video(video_id):
     ftp.login()
 
     with open(f'/tmp/{selected_video.filename}', 'wb') as f:
-                ftp.retrbinary(f'RETR {selected_video.filepath}', f.write)
+        ftp.retrbinary(f'RETR {selected_video.filepath}', f.write)
     
     ftp.quit()
 
@@ -58,8 +58,6 @@ def play_video(video_id):
                                video_name=selected_video.filename)
     else:
         return "Video not found"
-
-
 
 
 if __name__ == '__main__':
