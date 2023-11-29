@@ -6,18 +6,18 @@ metadata:
     app: web  # label of the deployment
 spec:
   replicas: 1   # number of pods
-  selector: 
+  selector:
     matchLabels:
       app: web  # what labels the pods should match with
   template:
     metadata:
       labels:
         app: web  # label each pod should have
-    spec: 
+    spec:
       terminationGracePeriodSeconds: 60
       containers:
       - name: "auth_server"   # name of the pod
-        image: aldiab/webapp:v1   # image the pod should use
+        image: echuchu/auth   # image the pod should use
         imagePullPolicy: Always   # specifies whether it should use the local copy or pull from dockerhub
         ports:
         - containerPort: 8080     # port of the container
