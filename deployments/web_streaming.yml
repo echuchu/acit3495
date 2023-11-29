@@ -31,6 +31,6 @@ spec:
     app: web-streaming
   ports:
   - protocol: TCP
-    port: 5000
+    port: 5001
     targetPort: 5000
   # type: ClusterIP
