@@ -1,0 +1,59 @@
+apiVersion: apps/v1   # how the program will read this file
+kind: Deployment  # type of deployment (pod, RS, deployment)
+metadata:
+  name: web-deploy  # name of the deployment
+  labels:
+    app: web  # label of the deployment
+spec:
+  replicas: 1   # number of pods
+  selector: 
+    matchLabels:
+      app: web  # what labels the pods should match with
+  template:
+    metadata:
+      labels:
+        app: web  # label each pod should have
+    spec: 
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: "auth_server"   # name of the pod
+        image: aldiab/webapp:v1   # image the pod should use
+        imagePullPolicy: Always   # specifies whether it should use the local copy or pull from dockerhub
+        ports:
+        - containerPort: 8080     # port of the container
+        env:
+          - name: BASIC_AUTH_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: auth_secret
+                key: BASIC_AUTH_USERNAME
+          - name: BASIC_AUTH_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: auth_secret
+                key: BASIC_AUTH_PASSWORD
+          - name: SERVER_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: auth_config
+                key: SERVER_NAME
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: auth_config
+                key: PORT
+---
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: load-balancer
+  labels:
+    app: web
+    service: lb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: web
