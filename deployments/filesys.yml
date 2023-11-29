@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deploy
+  labels:
+    app: web
+spec: 
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: web
+  template: 
+    metadata:
+      labels:
+        app: web
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers: # what container runs in each pod
+      - name: filesys # name of container inside pod
+        image: echuchu/filesys # docker image for the container
+        # imagePullPolicy: Always # ensures image is pulled from container registry so it is latest version
+        ports:
+        - containerPort: 8080 # container within pod is on 8080
+
+---
+
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: load-balancer
+  labels:
+    app: web
+    service: lb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: web
