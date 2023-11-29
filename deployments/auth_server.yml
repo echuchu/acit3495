@@ -25,20 +25,20 @@ spec:
           - name: BASIC_AUTH_USERNAME
             valueFrom:
               secretKeyRef:
-                name: auth_secret
-                key: BASIC_AUTH_USERNAME
+                name: secret
+                key: basic-auth-username
           - name: BASIC_AUTH_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: auth_secret
-                key: BASIC_AUTH_PASSWORD
+                name: secret
+                key: basic-auth-password
           - name: SERVER_NAME
             valueFrom:
               configMapKeyRef:
-                name: auth_config
-                key: SERVER_NAME
+                name: config
+                key: server-name
           - name: PORT
             valueFrom:
               configMapKeyRef:
-                name: auth_config
-                key: PORT
+                name: config
+                key: port
