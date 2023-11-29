@@ -16,7 +16,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 60
       containers:
-      - name: "auth_server"   # name of the pod
+      - name: "auth-server"   # name of the pod
         image: echuchu/auth   # image the pod should use
         imagePullPolicy: Always   # specifies whether it should use the local copy or pull from dockerhub
         ports:
