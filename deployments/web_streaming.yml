@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: web-streaming
-        image: [your-web-streaming-image]
+        image: echuchu/web_streaming
         ports:
         - containerPort: 5000
 

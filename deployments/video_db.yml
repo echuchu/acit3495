@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: video-db
-        image: mysql:5.7
+        image: echuchu/video_db
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
