@@ -13,6 +13,8 @@ COPY files/index.html /
 COPY files/runfile /
 COPY files/nginx.conf.tmpl /
 
+RUN chmod a+x /runfile
+
 # use SIGQUIT for graceful shutdown
 # c.f. http://nginx.org/en/docs/control.html
 STOPSIGNAL SIGQUIT
