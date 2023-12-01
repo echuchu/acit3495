@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
     name: configs
     labels:
-        app: configs
+        app: acit3495
 data:
     server-name: "proxy.acit3495.net"
     port: "80"

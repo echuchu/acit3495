@@ -1,18 +1,18 @@
 apiVersion: apps/v1   # how the program will read this file
 kind: Deployment  # type of deployment (pod, RS, deployment)
 metadata:
-  name: web-deploy  # name of the deployment
+  name: auth  # name of the deployment
   labels:
-    app: web  # label of the deployment
+    app: auth  # label of the deployment
 spec:
   replicas: 1   # number of pods
   selector:
     matchLabels:
-      app: web  # what labels the pods should match with
+      app: acit3495  # what labels the pods should match with
   template:
     metadata:
       labels:
-        app: web  # label each pod should have
+        app: acit3495  # label each pod should have
     spec:
       terminationGracePeriodSeconds: 60
       containers:
@@ -25,20 +25,20 @@ spec:
           - name: BASIC_AUTH_USERNAME
             valueFrom:
               secretKeyRef:
-                name: secret
+                name: secrets
                 key: basic-auth-username
           - name: BASIC_AUTH_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: secret
+                name: secrets
                 key: basic-auth-password
           - name: SERVER_NAME
             valueFrom:
               configMapKeyRef:
-                name: config
+                name: configs
                 key: server-name
           - name: PORT
             valueFrom:
               configMapKeyRef:
-                name: config
+                name: configs
                 key: port
