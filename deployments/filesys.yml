@@ -30,8 +30,8 @@ metadata:
   name: filesys-service
 spec:
   selector:
-    app: acit3495
+    app: filesys
   ports:
   - protocol: TCP
-  - port: 80
+    port: 80
     targetPort: 8080
