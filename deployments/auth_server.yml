@@ -1,18 +1,18 @@
 apiVersion: apps/v1   # how the program will read this file
 kind: Deployment  # type of deployment (pod, RS, deployment)
 metadata:
-  name: auth  # name of the deployment
+  name: auth-deploy  # name of the deployment
   labels:
     app: auth  # label of the deployment
 spec:
   replicas: 1   # number of pods
   selector:
     matchLabels:
-      app: acit3495  # what labels the pods should match with
+      app: auth  # what labels the pods should match with
   template:
     metadata:
       labels:
-        app: acit3495  # label each pod should have
+        app: auth  # label each pod should have
     spec:
       terminationGracePeriodSeconds: 60
       containers:
@@ -42,3 +42,17 @@ spec:
               configMapKeyRef:
                 name: configs
                 key: port
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+spec:
+  selector:
+    app: auth
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

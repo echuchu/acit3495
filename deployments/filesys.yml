@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-deploy
+  name: filesys-deploy
   labels:
-    app: web
+    app: filesys
 spec: 
   replicas: 1 
   selector:
     matchLabels:
-      app: web
+      app: filesys
   template: 
     metadata:
       labels:
-        app: web
+        app: filesys
     spec:
       terminationGracePeriodSeconds: 60
       containers: # what container runs in each pod
@@ -27,14 +27,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: load-balancer
-  labels:
-    app: web
-    service: lb
+  name: filesys-service
 spec:
-  type: LoadBalancer
+  selector:
+    app: acit3495
   ports:
+  - protocol: TCP
   - port: 80
     targetPort: 8080
-  selector:
-    app: web
