@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: Auth
+spec:
+  selector:
+    service: lb
+  ports:
+    - name: auth
+      port: 80
+      targetPort: 8080
+    - name: upload
+      port: 5000
+      targetPort: 5000
+    - name: stream
+      port: 5001
+      targetPort: 5000
+  type: LoadBalancer
+  loadBalancerIP: 34.135.118.50
