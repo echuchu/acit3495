@@ -46,7 +46,7 @@ spec:
       volumes:
       - name: video-db-storage
         persistentVolumeClaim:
-          claimName: mysql-pvc
+          claimName: video-db-pvc
 
 ---
 
