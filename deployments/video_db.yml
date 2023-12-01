@@ -43,6 +43,7 @@ spec:
         volumeMounts:
         - name: video-db-storage
           mountPath: /var/lib/mysql
+      
       volumes:
       - name: video-db-storage
         persistentVolumeClaim:
