@@ -5,6 +5,6 @@ metadata:
     labels:
         app: acit3495
 data:
-    server-name: "proxy.acit3495.net"
+    # server-name: "proxy.acit3495.net"
     port: "80"
     database: "video"

@@ -32,11 +32,11 @@ spec:
               secretKeyRef:
                 name: secrets
                 key: basic-auth-password
-          - name: SERVER_NAME
-            valueFrom:
-              configMapKeyRef:
-                name: configs
-                key: server-name
+          # - name: SERVER_NAME
+          #   valueFrom:
+          #     configMapKeyRef:
+          #       name: configs
+          #       key: server-name
           - name: PORT
             valueFrom:
               configMapKeyRef:
