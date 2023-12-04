@@ -54,7 +54,7 @@ def upload_success():
 
             # Use ftp to save file to filesys
             ftp_filepath = f'/shared/{filename}'
-            ftp = FTP('filesys-service')
+            ftp = FTP('filesys-service:20')
             ftp.login()
             ftp.storbinary(f'STOR {ftp_filepath}', open(f'/tmp/{filename}', 'rb'))
             ftp.quit()

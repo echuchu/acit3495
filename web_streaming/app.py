@@ -46,7 +46,7 @@ def play_video(video_id):
     session.close()
 
     # Use ftp to get video file from filesys
-    ftp = FTP('filesys-service')
+    ftp = FTP('filesys-service:20')
     ftp.login()
     # Save video file temporarily into /tmp
     with open(f'/tmp/{selected_video.filename}', 'wb') as f:

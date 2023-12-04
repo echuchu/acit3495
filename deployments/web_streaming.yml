@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: web-streaming
-        image: echuchu/web_streaming
+        image: echuchu/web_streaming:v0.01
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
