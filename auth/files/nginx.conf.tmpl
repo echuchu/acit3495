@@ -1,5 +1,5 @@
 user nginx;
-worker_processes ##WORKER_PROCESSES##;
+worker_processes auto;
 
 error_log /dev/stdout info;
 pid /var/run/nginx.pid;
@@ -12,11 +12,11 @@ http {
   access_log /dev/stdout;
 
   server {
-    listen ##PORT##;
-    server_name "34.136.27.83";
+    listen 80;
+    server_name _;
 
-    client_max_body_size ##CLIENT_MAX_BODY_SIZE##;
-    proxy_read_timeout ##PROXY_READ_TIMEOUT##;
+    client_max_body_size 1000M;
+    proxy_read_timeout 60s;
 
     include /etc/nginx/conf.d/*.conf;
 
@@ -34,22 +34,22 @@ http {
 
     location /upload {
       proxy_set_header X-Forwarded-HOst $host;
-      proxy_pass http://34.135.118.50:5000;
+      proxy_pass http://34.106.138.236:5000;
     }
 
     location /display {
       proxy_set_header X-Forwarded-HOst $host;
-      proxy_pass http://34.135.118.50:5001;
+      proxy_pass http://34.106.138.236:5001;
     }
 
     location /play_video/ {
       proxy_set_header X-Forwarded-Host $host;
-      proxy_pass http://34.135.118.50:5001;
+      proxy_pass http://34.106.138.236:5001;
     }
 
     location /static/ {
       proxy_set_header X-Forwarded-Host $host;
-      proxy_pass http://34.135.118.50:5001;
+      proxy_pass http://34.106.138.236:5001;
 }
 
   }

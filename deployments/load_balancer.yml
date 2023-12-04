@@ -16,4 +16,4 @@ spec:
       port: 5001
       targetPort: 5000
   type: LoadBalancer
-  loadBalancerIP: 34.135.118.50
+  loadBalancerIP: 34.106.138.236
