@@ -4,7 +4,7 @@ metadata:
   name: web-streaming-deploy
   labels:
     app: web-streaming
-    service: loadbalancer
+    # service: loadbalancer
 spec:
   replicas: 1
   selector:
@@ -14,7 +14,7 @@ spec:
     metadata:
       labels:
         app: web-streaming
-        service: loadbalancer
+        # service: loadbalancer
     spec:
       containers:
       - name: web-streaming
@@ -28,6 +28,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: web-streaming-service
+  labels:
+    service: loadbalancer
 spec:
   selector:
     app: web-streaming

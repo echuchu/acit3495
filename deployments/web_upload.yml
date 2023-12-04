@@ -4,7 +4,7 @@ metadata:
   name: web-upload-deploy
   labels:
     app: web-upload
-    service: loadbalancer
+    # service: loadbalancer
 spec:
   replicas: 1
   selector:
@@ -14,7 +14,7 @@ spec:
     metadata:
       labels:
         app: web-upload
-        service: loadbalancer
+        # service: loadbalancer
     spec:
       containers:
       - name: web-upload
@@ -28,6 +28,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: web-upload-service
+  labels:
+    service: loadbalancer
 spec:
   selector:
     app: web-upload
