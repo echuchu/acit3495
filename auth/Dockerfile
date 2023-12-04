@@ -9,6 +9,10 @@ ENV CLIENT_MAX_BODY_SIZE 1000M
 ENV PROXY_READ_TIMEOUT 60s
 ENV WORKER_PROCESSES auto
 
+ENV BASIC_AUTH_USERNAME username
+ENV BASIC_AUTH_PASSWORD password
+ENV PORT 80
+
 COPY files/index.html /
 COPY files/runfile /
 COPY files/nginx.conf.tmpl /
