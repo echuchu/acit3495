@@ -2,7 +2,7 @@ version: 1
 datastore:
   user: video_user
   password: password
-  hostname: mysql
+  hostname: video-db-service
   port: 3306
   db: video
 # fileupload:
