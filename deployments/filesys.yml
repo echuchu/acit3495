@@ -18,9 +18,9 @@ spec:
       containers: # what container runs in each pod
       - name: filesys # name of container inside pod
         image: echuchu/filesys # docker image for the container
-        # imagePullPolicy: Always # ensures image is pulled from container registry so it is latest version
+        imagePullPolicy: Always # ensures image is pulled from container registry so it is latest version
         ports:
-        - containerPort: 8080 # container within pod is on 8080
+        - containerPort: 20
 
 ---
 
@@ -33,5 +33,5 @@ spec:
     app: filesys
   ports:
   - protocol: TCP
-    port: 80
-    targetPort: 8080
+    port: 20
+    targetPort: 20
