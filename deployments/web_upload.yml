@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         app: web-upload
+        service: loadbalancer
     spec:
       containers:
       - name: web-upload

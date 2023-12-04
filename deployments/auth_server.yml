@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         app: auth  # label each pod should have
+        service: loadbalancer
     spec:
       terminationGracePeriodSeconds: 60
       containers:
