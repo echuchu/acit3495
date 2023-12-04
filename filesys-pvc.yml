@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: filesys-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce  # Adjust based on your access mode requirements
+  resources:
+    requests:
+      storage: 5Gi  # Adjust based on your storage requirements

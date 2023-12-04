@@ -24,6 +24,14 @@ spec:
         - containerPort: 20
         - containerPort: 30021
         - containerPort: 30020
+        volumeMounts:
+        - name: filesys-storage
+          mountPath: /srv/ftp/shared
+
+      volumes:
+      - name: filesys-storage
+        persistentVolumeClaim:
+          claimName: filesys-pvc
 
 ---
 
