@@ -4,7 +4,7 @@ metadata:
   name: auth-lb
 spec:
   selector:
-    app: auth
+    service: loadblancer
   ports:
     - name: auth
       port: 80

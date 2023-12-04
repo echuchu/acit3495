@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: web-streaming
+        service: loadbalancer
     spec:
       containers:
       - name: web-streaming
