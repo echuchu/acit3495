@@ -39,17 +39,17 @@ http {
 
     location /display {
       proxy_set_header X-Forwarded-HOst $host;
-      proxy_pass http://web-streaming-service:5001;
+      proxy_pass http://web-streaming-service:5000;
     }
 
     location /play_video/ {
       proxy_set_header X-Forwarded-Host $host;
-      proxy_pass http://web-streaming-service:5001;
+      proxy_pass http://web-streaming-service:5000;
     }
 
     location /static/ {
       proxy_set_header X-Forwarded-Host $host;
-      proxy_pass http://web-streaming-service:5001;
+      proxy_pass http://web-streaming-service:5000;
 }
 
   }
