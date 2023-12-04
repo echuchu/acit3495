@@ -4,6 +4,7 @@ metadata:
   name: auth-deploy  # name of the deployment
   labels:
     app: auth  # label of the deployment
+    service: loadbalancer
 spec:
   replicas: 1   # number of pods
   selector:
@@ -13,7 +14,6 @@ spec:
     metadata:
       labels:
         app: auth  # label each pod should have
-        service: loadbalancer
     spec:
       terminationGracePeriodSeconds: 60
       containers:

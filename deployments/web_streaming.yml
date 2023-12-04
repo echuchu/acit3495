@@ -4,6 +4,7 @@ metadata:
   name: web-streaming-deploy
   labels:
     app: web-streaming
+    service: loadbalancer
 spec:
   replicas: 1
   selector:

@@ -4,6 +4,7 @@ metadata:
   name: web-upload-deploy
   labels:
     app: web-upload
+    service: loadbalancer
 spec:
   replicas: 1
   selector:
@@ -13,7 +14,6 @@ spec:
     metadata:
       labels:
         app: web-upload
-        service: loadbalancer
     spec:
       containers:
       - name: web-upload
