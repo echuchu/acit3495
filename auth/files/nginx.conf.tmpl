@@ -34,22 +34,22 @@ http {
 
     location /upload {
       proxy_set_header X-Forwarded-HOst $host;
-      proxy_pass http://34.106.138.236:5000;
+      proxy_pass http://web-upload-service:5000;
     }
 
     location /display {
       proxy_set_header X-Forwarded-HOst $host;
-      proxy_pass http://34.106.138.236:5001;
+      proxy_pass http://web-streaming-service:5001;
     }
 
     location /play_video/ {
       proxy_set_header X-Forwarded-Host $host;
-      proxy_pass http://34.106.138.236:5001;
+      proxy_pass http://web-streaming-service:5001;
     }
 
     location /static/ {
       proxy_set_header X-Forwarded-Host $host;
-      proxy_pass http://34.106.138.236:5001;
+      proxy_pass http://web-streaming-service:5001;
 }
 
   }
