@@ -21,6 +21,13 @@ spec:
       - name: "auth-server"   # name of the pod
         image: echuchu/auth:v0.01   # image the pod should use
         imagePullPolicy: Always   # specifies whether it should use the local copy or pull from dockerhub
+        resources:
+          limits:
+            cpu: 500m
+            memory: 60Mi
+          requests:
+            cpu: 250m
+            memory: 50Mi
         ports:
         - containerPort: 8080     # port of the container
         env:
