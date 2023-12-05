@@ -43,9 +43,6 @@ spec:
         volumeMounts:
         - name: video-db-storage
           mountPath: /var/lib/mysql
-        resources:
-          requests:
-            cpu: 500m
       
       volumes:
       - name: video-db-storage
