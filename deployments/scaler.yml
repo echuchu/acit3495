@@ -16,3 +16,6 @@ spec:
       target:
         type: Utilization
         averageUtilization: 50
+  selector:
+    matchLabels:
+      app: auth
