@@ -19,7 +19,7 @@ RUN mkdir -p /srv/ftp/shared
 
 # Set permissions for the FTP directory
 RUN chmod 755 /srv/ftp
-RUN chmod 777 /srv/ftp/shared && chown root:ftp /srv/ftp/shared
+RUN chmod 777 /srv/ftp/shared && chown ftp:ftp /srv/ftp/shared
 
 RUN echo 'testfile1' > /srv/ftp/shared/testfile1
 
