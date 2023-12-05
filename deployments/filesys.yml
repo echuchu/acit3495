@@ -26,7 +26,7 @@ spec:
         - containerPort: 30020
         volumeMounts:
         - name: filesys-storage
-          mountPath: /srv/ftp
+          mountPath: /srv/ftp/shared
 
       volumes:
       - name: filesys-storage
