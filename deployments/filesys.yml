@@ -17,7 +17,7 @@ spec:
       terminationGracePeriodSeconds: 60
       containers: # what container runs in each pod
       - name: filesys # name of container inside pod
-        image: echuchu/filesys # docker image for the container
+        image: echuchu/filesys:v0.01 # docker image for the container
         imagePullPolicy: Always # ensures image is pulled from container registry so it is latest version
         ports:
         - containerPort: 21
