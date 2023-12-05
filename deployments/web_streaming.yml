@@ -4,7 +4,7 @@ metadata:
   name: web-streaming-deploy
   labels:
     app: web-streaming
-    service: loadbalancer
+    # service: loadbalancer
 spec:
   replicas: 1
   selector:
@@ -22,6 +22,9 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
+        resources:
+          requests:
+            cpu: 500m
 
 ---
 

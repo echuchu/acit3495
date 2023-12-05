@@ -27,6 +27,9 @@ spec:
         volumeMounts:
         - name: filesys-storage
           mountPath: /srv/ftp
+        resources:
+          requests:
+            cpu: 500m
 
       volumes:
       - name: filesys-storage

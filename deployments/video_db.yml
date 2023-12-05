@@ -48,6 +48,9 @@ spec:
       - name: video-db-storage
         persistentVolumeClaim:
           claimName: video-db-pvc
+      resources:
+          requests:
+            cpu: 500m
 
 ---
 
